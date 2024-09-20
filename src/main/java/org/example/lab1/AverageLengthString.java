@@ -26,10 +26,18 @@ public class AverageLengthString {
 
 
     public static void main(String[] args) {
+        System.out.print("Your args: ");
+        for(String i: args) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+
         AverageLengthString als = new AverageLengthString();
         String[] arr = als.getStrings(args);
+
+        System.out.print("Args below average length: ");
         for(String i: arr) {
-            System.out.println(i);
+            System.out.print(i + " ");
         }
     }
 }
