@@ -31,21 +31,21 @@ public final class Person {
         return Objects.hash(firstName, lastName, age);
     }
 
-    //    public static void main(String[] args) {
-//
-//        GsonBuilder builder = new GsonBuilder();
-//        builder.setPrettyPrinting();
-//
-//        Gson gson = builder.create();
-//        Person p1 = new Person("John", "Doe", 69);
-//        Person p2 = new Person("John", "Doe", 69);
-//
-//        String res = gson.toJson(p2);
-//
-//        p2 = gson.fromJson(res, Person.class);
-//        System.out.println(p1.equals(p2));
-//
-//
-//
-//    }
+    public static void main(String[] args) {
+
+    GsonBuilder builder = new GsonBuilder();
+    builder.setPrettyPrinting();
+
+    Gson gson = builder.create();
+    Person p1 = new Person("John", "Doe", 69);
+    Person p2 = new Person("John", "Doe", 69);
+
+    String res = gson.toJson(p2);
+
+    p2 = gson.fromJson(res, Person.class);
+    System.out.println(p1.equals(p2));
+
+
+
+    }
 }
