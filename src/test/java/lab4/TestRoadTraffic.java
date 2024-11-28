@@ -1,5 +1,6 @@
 package lab4;
 
+import org.example.lab4.Road;
 import org.example.lab4.people.Firefighter;
 import org.example.lab4.people.Passenger;
 import org.example.lab4.people.Policeman;
@@ -35,7 +36,7 @@ public class TestRoadTraffic {
         bus.addPassenger(new Policeman(names[8]));
         bus.addPassenger(new Policeman(names[9]));
 
-        // Test
+        // Test 10 seats
 
         assertThrows(IllegalStateException.class, () -> {
             bus.addPassenger(new Policeman(names[10]));
@@ -46,7 +47,17 @@ public class TestRoadTraffic {
     void testMaxTaxi() {
 
         // Preparation
+        Taxi taxi = new Taxi();
+        taxi.addPassenger(new RegularPassenger(names[0]));
+        taxi.addPassenger(new Firefighter(names[1]));
+        taxi.addPassenger(new Policeman(names[2]));
+        taxi.addPassenger(new RegularPassenger(names[3]));
+        taxi.addPassenger(new Policeman(names[4]));
 
+        // Test 5 seats
+        assertThrows(IllegalStateException.class, () -> {
+            taxi.addPassenger(new Firefighter(names[5]));
+        }, "Not enough seats");
 
     }
 
@@ -81,7 +92,7 @@ public class TestRoadTraffic {
         policeCar.addPassenger(new Policeman(names[3]));
         policeCar.addPassenger(new Policeman(names[4]));
 
-        // Test
+        // Test 5 seats
 
         assertThrows(IllegalStateException.class, () -> {
             policeCar.addPassenger(new Policeman(names[6]));
@@ -106,24 +117,37 @@ public class TestRoadTraffic {
         fireEngine.addPassenger(new Firefighter(names[5]));
         fireEngine.addPassenger(new Firefighter(names[6]));
 
-        // Test
+        // Test 7 seats
 
         assertThrows(IllegalStateException.class, () -> {
-            fireEngine.addPassenger(new Firefighter(names[8]));
+            fireEngine.addPassenger(new Firefighter(names[7]));
         }, "Not enough seats");
     }
 
     @Test
-    void testMinBus() {
-
-        // Preparation
+    void testRoadTrafficCount() {
         Bus bus = new Bus();
-        bus.removePassenger(new Policeman(names[0]));
+        PoliceCar policeCar = new PoliceCar();
+        FireEngine fireEngine = new FireEngine();
+
+        // Add passengers
+        bus.addPassenger(new RegularPassenger(names[0]));
+        bus.addPassenger(new RegularPassenger(names[1]));
+
+        policeCar.addPassenger(new Policeman(names[2]));
+        policeCar.addPassenger(new Policeman(names[3]));
+
+        fireEngine.addPassenger(new Firefighter(names[4]));
+        fireEngine.addPassenger(new Firefighter(names[5]));
+
+        Road road = new Road();
+        road.addCarToRoad(bus);
+        road.addCarToRoad(fireEngine);
+        road.addCarToRoad(policeCar);
 
         // Test
-        assertThrows(IllegalStateException.class, () -> {
-            bus.addPassenger(new Policeman(names[10]));
-        }, "This fellow is not inside");
+        assertEquals(6, road.getCountOfHumans());
+
     }
 
 }
