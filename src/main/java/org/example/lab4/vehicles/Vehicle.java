@@ -2,15 +2,17 @@ package org.example.lab4.vehicles;
 
 import org.example.lab4.people.Passenger;
 
+import java.util.ArrayList;
 import java.util.List;
 
-abstract class Vehicle<T extends Passenger> {
+public abstract class Vehicle<T extends Passenger> {
 
-    private int maxSeats;
+    private final int maxSeats;
     private final List<T> passengers;
 
-    public Vehicle(List<T> passengers) {
-        this.passengers = passengers;
+    public Vehicle(int maxSeats) {
+        this.maxSeats = maxSeats;
+        this.passengers = new ArrayList<>();
     }
 
     public int getMaxSeats() {
@@ -27,6 +29,11 @@ abstract class Vehicle<T extends Passenger> {
         passengers.add(passenger);
     }
 
-    public
+    public void removePassenger(T passenger) {
+        if(!passengers.contains(passenger)) {
+            throw new IllegalStateException("This fellow is not inside");
+        }
+        passengers.remove(passenger);
+    }
 
 }
