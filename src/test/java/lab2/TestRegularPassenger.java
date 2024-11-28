@@ -5,7 +5,7 @@ import org.example.lab2.Person;
 import org.junit.Test;
 
 
-public class TestPerson {
+public class TestRegularPassenger {
     @Test
     public void equalsContract() {
         try {
