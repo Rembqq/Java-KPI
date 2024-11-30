@@ -1,6 +1,11 @@
 package org.example.lab3.model;
 
-public class Rectangle extends Shape {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Rectangle extends Shape implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private final double width;
     private final double height;
 

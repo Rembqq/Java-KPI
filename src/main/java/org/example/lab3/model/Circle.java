@@ -1,6 +1,11 @@
 package org.example.lab3.model;
 
-public class Circle extends Shape {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Circle extends Shape implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 3L;
     private final double radius;
 
     public Circle(String shapeColor, double radius) {

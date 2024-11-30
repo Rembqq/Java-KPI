@@ -20,7 +20,9 @@ public class Main {
                     3. Calculate Total Area by Shape Type
                     4. Sort Shapes by Area
                     5. Sort Shapes by Color
-                    6. Exit
+                    6. Save objects to file
+                    7. Get objects from file
+                    8. Exit
                     """);
             System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
@@ -40,7 +42,9 @@ public class Main {
                     shapeController.sortShapesByColor();
                     System.out.println("Shapes sorted by color.");
                 }
-                case 6 -> {
+                case 6 -> shapeController.saveObjectsToFile();
+                case 7 -> shapeController.getObjectsFromFile();
+                case 8 -> {
                     System.out.println("Exiting...");
                     return;
                 }

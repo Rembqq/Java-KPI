@@ -1,11 +1,13 @@
 package org.example.lab3.controllers;
 
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import org.example.lab3.model.Circle;
 import org.example.lab3.model.Rectangle;
 import org.example.lab3.model.Shape;
 import org.example.lab3.model.Triangle;
 import org.example.lab3.view.ShapeView;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -55,6 +57,44 @@ public class ShapeController {
 
     public void sortShapesByArea() {
         shapes.sort(Comparator.comparingDouble(Shape::calcArea));
+    }
+
+    public void saveObjectsToFile() {
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("shapes.dat"))) {
+            oos.writeObject(shapes);
+            System.out.println("Об'єкти збережено у файл shapes.dat.");
+        } catch (IOException e) {
+            System.err.println("Помилка запису у файл: " + e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void getObjectsFromFile() {
+//        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("shapes.dat"))) {
+//            System.out.println(shapes);
+//            System.out.println("Point 1");
+//            List<Shape> loadedShapes = (List<Shape>) ois.readObject();
+//            System.out.println("Point 2");
+//            shapes.clear();
+//            System.out.println("Point 3");
+//            shapes.addAll(loadedShapes);
+//            System.out.println("Об'єкти завантажено з файлу shapes.dat.");
+//        } catch (IOException | ClassNotFoundException e) {
+//            System.err.println("Помилка читання з файлу: " + e.getMessage());
+//        }
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("shapes.dat"))) {
+            System.out.println("Загрузка объектов...");
+            List<Shape> loadedShapes = (List<Shape>) ois.readObject();
+            shapes.clear();
+            shapes.addAll(loadedShapes);
+            System.out.println("Об'єкти завантажено з файлу shapes.dat.");
+        } catch (InvalidClassException e) {
+            System.err.println("Версия класса не совпадает: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Помилка читання з файлу: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.err.println("Клас не знайдено: " + e.getMessage());
+        }
     }
 
     public void sortShapesByColor() {

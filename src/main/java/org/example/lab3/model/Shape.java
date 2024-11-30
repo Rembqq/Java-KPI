@@ -1,6 +1,11 @@
 package org.example.lab3.model;
 
-public abstract class Shape implements Drawable {
+import java.io.Serial;
+import java.io.Serializable;
+
+public abstract class Shape implements Drawable, Serializable {
+    @Serial
+    private static final long serialVersionUID = 4L;
     private final String shapeColor;
     public Shape(String shapeColor) {
         this.shapeColor = shapeColor;
