@@ -25,7 +25,7 @@ public class ShapeController {
     public void generateShapes() {
         String[] colors = {"Red", "Green", "Blue", "Yellow"};
         Random random = new Random();
-        int shapesAmount = 10;
+        int shapesAmount = 2;
         for(int i = 0; i < shapesAmount; ++i) {
             String color = colors[random.nextInt(colors.length)];
             switch(random.nextInt(3)) {
